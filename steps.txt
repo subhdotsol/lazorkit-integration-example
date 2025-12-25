@@ -1,0 +1,41 @@
+# LazorKit Bounty - Setup Steps
+
+## Project Structure Reorganization
+The nextjs-passkey-wallet folder was moved to the root level for simplicity.
+
+### Commands Used:
+```bash
+# 1. Move the project out of examples folder
+mv examples/nextjs-passkey-wallet ./
+
+# 2. Remove the empty examples folder
+rm -rf examples
+```
+
+## Current Project Structure:
+```
+lazorkit/
+├── README.md                 # Main documentation
+├── nextjs-passkey-wallet/    # Next.js example app
+│   ├── src/
+│   ├── docs/
+│   ├── package.json
+│   └── ...
+└── steps.txt                 # This file
+```
+
+## To Run the Next.js App:
+```bash
+cd nextjs-passkey-wallet
+npm install
+npm run dev
+```
+
+## Important Notes:
+- WebAuthn (passkeys) requires HTTPS for transaction signing
+- On localhost (HTTP), connection works but signing fails
+- Deploy to Vercel for full functionality:
+  ```bash
+  cd nextjs-passkey-wallet
+  npx vercel
+  ```
