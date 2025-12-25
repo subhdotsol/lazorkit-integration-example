@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { LazorkitClientProvider } from "@/components/providers/LazorkitProvider";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -9,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "LazorKit Passkey Wallet | Solana Smart Wallet Demo",
+  title: "LazorKit Wallet | Passkey-Native Solana Wallet",
   description:
-    "A demo application showcasing passkey-based wallet authentication on Solana using LazorKit SDK. Features include gasless transactions and Pay with Solana widget.",
+    "A beautiful passkey-based wallet on Solana. No seed phrases, no extensions, just your fingerprint. Features gasless transactions and stunning UI.",
   keywords: [
     "Solana",
     "Passkey",
@@ -20,7 +21,13 @@ export const metadata: Metadata = {
     "WebAuthn",
     "Gasless",
     "Crypto",
+    "Web3",
   ],
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -29,9 +36,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} antialiased bg-gray-950 text-white`}>
-        <LazorkitClientProvider>{children}</LazorkitClientProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <LazorkitClientProvider>
+            {children}
+          </LazorkitClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
